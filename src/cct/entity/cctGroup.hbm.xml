@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-lazy="true" >
+	<class table="cctGroup" name="cct.entity.cctGroup">
+		<id name="groupId" length="10"></id>
+		<property length="100" not-null="true" name="groupName"></property>
+		<property length="100" not-null="true" name="groupBrief"/>
+       	<property name="headmanA" length="40" not-null="true"></property>
+       	<property name="headmanB" length="40" not-null="true"></property>
+		<property length="200" not-null="true" name="member"></property>
+		<property length="20" not-null="true" name="category"/>
+		<property length="20" not-null="true" name="createTime"/>
+		<property length="20" not-null="true" name="endTime"/>
+		<property length="4" not-null="true" name="state"/>
+		<property length="500" not-null="true" name="remarks"></property>
+	</class>
+
+</hibernate-mapping>
+

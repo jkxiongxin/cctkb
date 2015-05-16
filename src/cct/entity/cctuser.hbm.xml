@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-lazy="true" >
+	<class table="cctuser" name="cct.entity.cctuser">
+		<id name="userName" length="20">
+		</id>
+		<property length="32" not-null="true" name="password"></property>
+		<property length="20" not-null="true" name="realName"></property>
+		<property length="40" not-null="true" name="nativePlace"></property>
+		<property length="20" not-null="true" name="theClass"></property>
+		<property length="40" not-null="true" name="domitory"></property>
+		<property length="20" not-null="true" name="contactInfo"></property>
+		<property length="40" not-null="true" name="email"></property>
+		<property length="20" not-null="true" name="qq"></property>
+		<property length="11" not-null="true" name="privilege"></property>
+		<property length="4" not-null="true" name="state"></property>
+		<property not-null="true" name="createTime"></property>
+		<property not-null="true" name="nickName"><column name="nickName" index="nickName"></column></property>
+		<property not-null="true" name="technologyIntro"></property>
+		<property not-null="true" name="remarks"></property>
+	</class>
+</hibernate-mapping>

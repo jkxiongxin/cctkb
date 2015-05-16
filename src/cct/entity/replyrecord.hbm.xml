@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-lazy="true" >
+	<class table="replyrecord" name="cct.entity.replyrecord">
+		<id name="replyId" length="11"></id>
+		<property name="knowledgeId" not-null="true" length="12"></property>
+		<property  name="nickName" not-null="true" length="40"/>
+		<property not-null="true" length="400" name="content"></property>
+		<property name="replyClass" not-null="true" length="11"/>
+	</class>
+</hibernate-mapping>

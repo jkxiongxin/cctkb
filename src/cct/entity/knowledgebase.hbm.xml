@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-lazy="true" >
+	<class table="knowledgebase" name="cct.entity.knowledgebase">
+		<id name="knowledgeId" length="12"></id>
+		<property length="20" not-null="true" name="createTime"></property>
+		<property length="11" not-null="true" name="attention"></property>
+		<property length="50" not-null="true" name="title"></property>
+		<property length="200" not-null="true" name="pageName"></property>
+		<property length="200" not-null="true" name="attachmentName"></property>
+		<property length="4" not-null="true" name="state"></property>
+       	<property name="uploader" length="40" not-null="true"></property>
+        <property name="classId" not-null="true" length="10"></property>
+	</class>
+</hibernate-mapping>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-lazy="true" >
+	<class table="groupstage" name="cct.entity.groupstage">
+		<id name="groupStageId" length="10">
+		</id>
+		<property name="groupId" length="40" not-null="true"></property>
+		<property length="4" not-null="true" name="state"></property>
+		<property length="20" not-null="true" name="startTime"></property>
+		<property  length="20" not-null="true" name="endTime"></property>
+		<property  length="20" not-null="true" name="stageName"></property>
+		<property  length="3000" not-null="true" name="goal"></property>
+	</class>
+</hibernate-mapping>
+

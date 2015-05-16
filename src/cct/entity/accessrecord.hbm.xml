@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-lazy="true" >
+	<class table="accessrecord" name="cct.entity.accessrecord">
+		<id name="id" length="11">
+			<generator class="increment"></generator>
+		</id>
+		<property length="20" not-null="true" name="visiter"></property>
+		<property length="20" not-null="true" name="startTime"></property>
+		<property length="20" not-null="true" name="endTime"></property>
+		<property length="20" not-null="true" name="lastTime"></property>
+		<property length="20" not-null="true" name="IP"></property>
+	</class>
+</hibernate-mapping>

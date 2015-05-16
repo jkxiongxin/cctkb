@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+       <context:annotation-config/>
+     <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+        	<!-- 测试junit时用 jdbc.properties-->
+        	<!-- 启动时用 /WEB-INF/classes/jdbc.properties-->
+            <value>jdbc.properties</value>
+        </property>
+    </bean>
+     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+     </bean>
+     
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+         <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+           <list>
+             <value>cct/entity/accessrecord.hbm.xml</value>
+             <value>cct/entity/cctuser.hbm.xml</value>
+             <value>cct/entity/cctGroup.hbm.xml</value>
+             <value>cct/entity/groupstage.hbm.xml</value>
+             <value>cct/entity/knowledgebase.hbm.xml</value>
+             <value>cct/entity/knowledgeclass.hbm.xml</value>
+             <value>cct/entity/post.hbm.xml</value>
+             <value>cct/entity/replyrecord.hbm.xml</value>
+           </list>
+        </property>
+         <property name="hibernateProperties">
+           <value>
+               hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+               hibernate.hbm2ddl.auto=none
+               hibernate.show_sql=false
+               hibernate.format_sql=false
+               hibernate.cache.use_second_level_cache=true
+               hibernate.cache.use_query_cache=false
+               hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+             </value>
+         </property>
+    </bean>
+    
+    <!--DAO接口 -->
+    <bean id="base" class="org.springframework.orm.hibernate4.support.HibernateDaoSupport" abstract="true">
+    	<property name="sessionFactory" ref="sessionFactory"></property>
+   	</bean>
+   	
+   	<bean id="baseDAO" class="cct.dao.baseDAOImpl" parent="base"></bean>
+   	
+  	<bean id="knowledgebaseDAO" class="cct.dao.knowledgebaseDAOImpl"></bean>
+  	
+  	<bean id="postDAO" class="cct.dao.postDAOImpl"/>
+  	
+  	<bean id="accessrecordDAO" class="cct.dao.accessrecordDAOImpl"/>
+  	
+  	<bean id="cctGroupDAO" class="cct.dao.cctGroupDAOImpl"/>
+  	
+  	<bean id="cctuserDAO" class="cct.dao.cctuserDAOImpl"/>
+  	
+  	<bean id="groupstageDAO" class="cct.dao.groupstageDAOImpl"/>
+  	
+  	<bean id="knowledgeclassDAO" class="cct.dao.knowledgeclassDAOImpl"/>
+  	
+  	<bean id="replyrecordDAO" class="cct.dao.replyrecordDAOImpl"/>
+  	
+  	
+  	<!--action类  -->
+  	<bean id="login" class="cct.action.loginAction">
+  		<property name="loginService" ref="loginService"></property>
+    </bean>
+    
+    <bean id="adduser" class="cct.action.addUserAction">
+	    <property name="addUserService" ref="addUserService"></property>
+    </bean>
+    
+    <bean id="adduserdetail" class="cct.action.addUserDetailAction">
+	  <property name="addUserDetailService" ref="addUserDetailService"></property>
+	</bean>
+	
+	<bean id="getMember" class="cct.action.getMemberAction">
+	  <property name="viewUsersService" ref="viewUsersService"></property>
+	</bean>
+	
+	<bean id="addGroupDetail" class="cct.action.addGroupDetailAction">
+	  <property name="addGroupService" ref="addGroupService"></property>
+	</bean>
+	
+	<bean id="addexceladdress" class="cct.action.uploadWeeklyReportAction">
+	 	<property name="addExcelAddressService" ref="addExcelAddressService"></property>
+	</bean>
+	
+	<bean id="download" class="cct.action.fileDownloadAction">
+		<property name="downloadService" ref="downloadService"></property>
+	</bean>
+	
+	<bean id="clickKnowledgeAction" class="cct.action.clickKnowledgeAction">
+		<property name="clickKnowledgeService" ref="clickKnowledgeService"></property>
+	</bean>
+	
+	<bean id="viewAllPost" class="cct.action.viewAllPostAction">
+		<property name="postService" ref="postService"/>
+	</bean>
+	
+	<bean id="addCctGroup" class="cct.action.addCctGroupAction">
+		<property name="cctGroupService" ref="cctGroupService"/>
+	</bean>
+	
+	<bean id="viewAllCctGroup" class="cct.action.viewAllCctGroupAction">
+		<property name="cctGroupService" ref="cctGroupService"/>
+	</bean>
+	
+	<bean id="deleteGroupstage" class="cct.action.deleteGroupstageAction">
+		<property name="groupstageService" ref="groupstageService"></property>
+	</bean>
+	
+	<bean id="addGroupstage" class="cct.action.addGroupstageAciton">
+		<property name="groupstageService" ref="groupstageService"/>
+	</bean>
+	
+	<bean id="alterGroupstage" class="cct.action.alterGroupstageAction">
+		<property name="groupstageService" ref="groupstageService"/>
+	</bean>
+    
+    
+    <!-- service类 -->
+   	<bean id="loginService" class="cct.service.impl.loginServiceImpl">
+   	    <property name="cctuserDAO" ref="cctuserDAO"> </property>
+	</bean>
+
+    <bean id="addUserService" class="cct.service.impl.addUserServiceImpl">
+    	<property name="baseDAO" ref="baseDAO"></property>
+    </bean>
+    
+    <bean id="addUserDetailService" class="cct.service.impl.addUserDetailServiceImpl">
+		<property name="baseDAO" ref="baseDAO"></property>
+	</bean>
+	
+	<bean id="viewUsersService" class="cct.service.impl.viewUsersServiceImpl">
+	  <property name="cctuserDAOImpl" ref="cctuserDAO"></property>
+	</bean>
+	
+	<bean id="addGroupService" class="cct.service.impl.addGroupServiceImpl">
+		<property name="baseDAO" ref="baseDAO"></property>
+	</bean>
+	
+	<bean id="addExcelAddressService" class="cct.service.impl.addExcelAddressServiceImpl">
+		<property name="baseDAO" ref="baseDAO"></property>
+	</bean>
+	
+	<bean id="downloadService" class="cct.service.impl.downloadServiceImpl">
+		<property name="baseDAO" ref="baseDAO"></property>
+	</bean>
+	
+	<bean id="clickKnowledgeService" class="cct.service.impl.clickKnowledgeServiceImpl">
+		<property name="baseDAO" ref="baseDAO"></property>
+	</bean>
+	
+	<bean id="postService" class="cct.service.impl.postServiceImpl">
+		<property name="postDAOImpl" ref="postDAO"/>
+	</bean>
+    
+    <bean id="cctGroupService" class="cct.service.impl.cctGroupServiceImpl">
+    	<property name="cctGroupDAOImpl" ref="cctGroupDAO"/>
+    </bean>
+    
+    <bean id="groupstageService" class="cct.service.impl.groupstageServiceImpl">
+    	<property name="groupstageDAOImpl" ref="groupstageDAO"/>
+    </bean>
+    
+    <bean id="knowledgeClassService" class="cct.service.impl.knowledgeClassServiceImpl">
+    	<property name="knowledgeclassDAOImpl" ref="knowledgeclassDAO"></property>
+    </bean>
+    
+	<!-- test类 -->
+	<bean id="addServiceTest" class="cct.test.addServiceTest">
+    	<property name="addUserService" ref="addUserService"/>
+    </bean>
+    <bean id="groupstageServiceTest" class="cct.test.groupstageServiceTest">
+    	<property name="groupstageService" ref="groupstageService"></property>
+    </bean>
+    <bean id="knowledgeClassServiceTest" class="cct.test.knowledgeClassServiceTest">
+    	<property name="knowledgeClassService" ref="knowledgeClassService"></property>
+    </bean>
+    <bean id="alterUserService" class="cct.service.impl.alterUserServiceImpl">
+    	<property name="cctuserDAOImpl" ref="cctuserDAO"></property>
+    </bean>
+    <bean id="alterPrivilegeAction" class="cct.action.alterPrivilegeAction">
+    	<property name="alterUserService" ref="alterUserService"></property>
+    </bean>
+    <bean id="alterPrivilegeActionTest" class="cct.test.alterPrivilegeActionTest">
+    	<property name="alterPrivilegeAction" ref="alterPrivilegeAction"></property>
+    </bean>
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+    </bean>
+</beans>

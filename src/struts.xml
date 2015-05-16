@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.action.extension" value="action,action"/>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+	<constant name="struts.devMode" value="false"/>
+	 <constant name="struts.objectFactory" value="spring" />
+	 <constant name="struts.configuraction.xml.reload" value="true"/>
+    <constant name="struts.multipart.maxSize" value="200000000"/>
+     <constant name="struts.multipart.saveDir " value="d:/1" />
+     <constant name="struts.i18n.encoding" value="utf-8" />
+	<package name="default" extends="struts-default">
+		<action name="addexceladdress" class="cct.action.uploadWeeklyReportAction">
+		<result name="success">/login.jsp</result>
+		<result name="fail">/relogin.jsp</result>
+		</action>
+		<action name="uploadknowledge" class="cct.action.uploadKnowledgePointAction">
+		<result name="success">/login.jsp</result>
+		<result name="fail">/relogin.jsp</result>
+		</action>
+		<action name="clickKnowledge" class="cct.action.checkKnowledgeAction">
+		<result name="success">/knowledge.jsp</result>
+		<result name="fail">/relogin.jsp</result>
+		</action>
+		<action name="test" class="test">
+			<result name="success">/success.jsp</result>
+		</action>
+		 <action name="filedownload" class="cct.action.fileDownloadAction">
+            <result name="success" type="stream">
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="inputName">downloadFile</param>
+            </result>
+        </action>
+	</package>
+	
+	<package name="json" extends="json-default">
+		<action name="upload" class="cct.action.uploadKnowledgePointAction">
+		</action>
+		<action name="addgroup" class="addgroup">
+			<result type="json" name="success">
+				<param name="root">message</param>
+			</result>
+		</action>
+		<action name="adduserdetail" class="adduserdetail">
+			<result name="success" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		<action name="link" class="cct.action.viewKnowledgeLinkAction" >
+    		<result type="json" name="success">
+    			<param name="root">jsonObj</param>
+    		</result>
+    	</action>
+    	<action name="getMember" class="getMember">
+    		<result type="json" name="success">
+    			<param name="root">jsonObj</param>
+    		</result>
+		</action>
+		<action name="login" class="login">
+		  <result name="success" type="json">
+				<param name="root">message</param>
+		  </result>
+		</action>
+		<action name="getPost" class="getPost">
+			<result name="success" type="json">
+				<param name="root">jsonObj</param>
+			</result>
+		</action>
+		<action name="imageUpload" class="cct.action.imageUploadAction" method="execute">
+            <!-- 动态设置savePath的属性值 -->
+            <param name="savePath">/upload</param>
+            <result name="success" type="json">
+				<param name="root">message</param>
+			</result>
+            <interceptor-ref name="fileUpload">
+                <!-- 文件过滤 -->
+                <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>
+                <!-- 文件大小, 以字节为单位 -->
+                <param name="maximumSize">1025956</param>
+            </interceptor-ref>
+            <!-- 默认拦截器必须放在fileUpload之后，否则无效 -->
+            <interceptor-ref name="defaultStack" />
+        </action>
+       <action name="adduser" class="adduser">
+		  <result name="success" type="json">
+		  	<param name="root">message</param>
+		  </result>
+		</action>
+		<action name="alterPrivilege" class="alterPrivilege">
+			<result name="success" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		<action name="changeMemberState" class="changeMemberState">
+			<result name="success" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		<action name="addCctGroup" class="addCctGroup">
+			<result name="success" type="json">
+				<param name="root">message</param>
+			</result>
+		</action>
+		<action name="getGroup" class="getGroup">
+			<result name="success" type="json">
+				<param name="root">jsonObj</param>
+			</result>
+		</action>
+		<action name="findMemberByName" class="findMember">
+     		<result name="success" type="json">
+     			<param name="root">jsonObj</param>
+     		</result>
+     	</action>
+     	<action name="addKnowledgeClass" class="addKnowledgeClass">
+     		<result name="success" type="json">
+     			<param name="root">message</param>
+     		</result>
+     	</action>
+     	<action name="getKnowledgeClass" class="getKnowledgeClass">
+     		<result name="success" type="json">
+     			<param name="root">jsonObj</param>
+     		</result>
+     	</action>
+     	<action name="updateKnowledgeClass" class="updateKnowledgeClass">
+     		<result name="success" type="json">
+     			<param name="root">message</param>
+     		</result>
+     	</action>
+		<action name="upload" class="cct.action.uploadKnowledgePointAction">
+		</action>
+		<action name="uploadImage" class="cct.action.imageUploadAction">
+			<result type="json" name="success">
+                <param name="root">
+                	jsonObject
+                </param>
+            </result>
+		</action>
+		<action name="link" class="cct.action.viewKnowledgeLinkAction" >
+    		<result type="json" name="success">
+    			<param name="root">jsonObj</param>
+    		</result>
+    	</action>
+    	<action name="weekly" class="cct.action.viewWeeklyReportAction">
+    	    	 <result type="json" name="success">
+    	    	 <param name="root">jsonObj</param>
+    	    	 </result>
+      	</action>
+    	 <action name="findmemberc" class="findmemberc">
+     		 <result type="json" name="success">
+     		 <param name="root">jsonObj</param>
+     		 </result>
+     	</action>
+     	<action name="getUserInformation" class="getUserInformation">
+     		<result type="json" name="success">
+     			<param name="root">jsonObj</param>
+     		</result>
+     	</action>
+     	<action name="viewCctgroup" class="viewCctgroup">
+     		<result type="json" name="success">
+     			<param name="root">jsonObj</param>
+     		</result>
+     	</action>
+     	<action name="shutDownCctGroup" class="shutDownCctGroup">
+     		<result type="json" name="success">
+     			<param name="root">message</param>
+     		</result>
+     	</action>
+	</package>
+</struts>

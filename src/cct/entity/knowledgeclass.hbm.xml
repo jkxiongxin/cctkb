@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-lazy="true" >
+	<class table="knowledgeclass" name="cct.entity.knowledgeclass">
+		<id name="classId" length="10"></id>
+		<property length="40" not-null="true" name="className"></property>
+		<property length="120" not-null="true" name="classBrief"></property>
+		<property length="11" not-null="true" name="knowledgeNumber"></property>
+		<property length="11" not-null="true" name="visitorVolume"></property>
+		<property length="11" not-null="true" name="replyVolume"></property>
+	</class>
+</hibernate-mapping>

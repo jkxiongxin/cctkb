@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-lazy="true" >
+	<class table="post" name="cct.entity.post">
+		<id name="postId" length="11">
+		</id>
+		<property length="50" not-null="true" name="tTime"></property>
+		<property name="nickName" not-null="true" length="40"></property>
+		<property length="40" not-null="true" name="grade"></property>
+		<property length="11" not-null="true" name="weekNo"></property>
+		<property length="100" not-null="true" name="semester"></property>
+		<property length="20" not-null="true" name="plan"></property>
+		<property length="50" not-null="true" name="performance"></property>
+	</class>
+</hibernate-mapping>
